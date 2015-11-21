@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}
+Tweepy
+{% endblock %}
+{% block body %}
+<nav class="main-nav">
+    <div class="lists">
+      <div class="brand">
+        <h1><a href="/">Tweepy</a></h1>
+      </div>
+   <!--    <form class="signin" method="POST" action="{{ url_for('login') }}">
+        <input type="text" name="username" placeholder="username" />
+        <input type="password" name="password" placeholder="password" />
+        <input type="submit" value="sign in" class="btn btn-signin" />
+      </form> -->
+    </div>
+  </nav>
+  <div class="content home">
+    <section class="signup-form">
+      <div class="signup-box">
+        <h2 class="box-title">Belum punya akun? Ayo daftar, gratis!</h2>
+        <form class="signup" method="POST" action="{{ url_for('register') }}">
+          <div class="section-username">
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="Username anda, digunakan pada saat sign in" />
+          </div>
+          <div class="section-fullname">
+            <label for="fullname">Fullname</label>
+            <input type="text" name="fullname" placeholder="Nama lengkap anda" />
+          </div>
+          <div class="section-password">
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="Password anda" />
+          </div>
+          <div class="section-password2">
+            <label for="password2">Password</label>
+            <input type="password" name="password2" placeholder="Masukkan ulang password anda" />
+          </div>
+          <input type="submit" name="btn-signup" class="btn btn-signup" value="sign up" />
+        </form>
+      </div>
+    </section>
+    <section class="about-site">
+      <div class="about-site-box">
+        <h2 class="box-title">Website ini hanya untuk demo tutorial saja.</h2>
+        <p>Database akan dibersihkan setiap harinya untuk mengurangi beban memori.</p>
+        <p>Anda dapat mengikuti tutorial pembuatan website ini di <a href="http://ambercat.rahmanda.net">ambercat.rahmanda.net</a></p>
+      </div>
+    </section>
+  </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+<nav class="main-nav">
+  <div class="lists">
+    <div class="brand">
+      <h1><a href="/">Tweepy</a></h1>
+    </div>
+    <ul class="actions">
+      {% if session.user_id %}
+      <li><a class="btn btn-signout" href="{{ url_for('logout') }}">sign out</a></li>
+      <li><a class="username">{{ session.username }}</a><li>
+        {% else %}
+        <li><a class="btn btn-signin" href="{{ url_for('login') }}">sign in</a></li>
+        {% endif %}
+      </ul>
+      <form class="search" method="get" action="">
+        <input type="text" name="input-search" placeholder="Cari teman"/>
+      </form>
+    </div>
+  </nav>

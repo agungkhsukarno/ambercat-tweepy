@@ -1,0 +1,269 @@
+/** * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/) * http://cssreset.com */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+* {
+  box-sizing: border-box; }
+
+input, textarea {
+  font-family: inherit;
+  font-size: inherit; }
+
+input[type='email'], input[type='text'], input[type='password'], textarea {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }
+
+body {
+  font-family: "Arial", Helvetica, sans-serif;
+  font-size: 14px;
+  color: #272822;
+  background-color: #F5F8FA;
+  overflow: auto; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+  a:visited {
+    color: inherit; }
+
+.btn {
+  border: 1px solid #C0BEBE;
+  padding: 5px 8px;
+  font-weight: bold;
+  border-radius: 2px; }
+  .btn:hover {
+    cursor: pointer; }
+  .btn:focus {
+    outline: none; }
+
+.action {
+  display: block;
+  overflow: hidden;
+  padding: 0.5em 1em;
+  border-bottom: 1px solid #C0BEBE; }
+
+.profile {
+  display: block;
+  float: left; }
+  .profile .fullname {
+    font-size: 1.5em; }
+  .profile .username {
+    padding-top: 0.5em; }
+
+.btn-signup, .btn-signin {
+  background-color: #93EA73;
+  border-color: #1EB805; }
+
+.btn-signout {
+  background-color: #EBC355;
+  border-color: #DD7716; }
+
+.btn-tweet {
+  background-color: #A3CBEE;
+  border-color: #509EE2; }
+
+.btn-unfollow {
+  display: inline-block;
+  float: right;
+  padding: 1em 1.5em;
+  background-color: #EBC355;
+  border-color: #DD7716; }
+
+.btn-follow {
+  display: inline-block;
+  float: right;
+  padding: 1em 1.5em;
+  background-color: #A3CBEE;
+  border-color: #509EE2; }
+
+.main-nav {
+  background-color: #3ABADE;
+  overflow: hidden;
+  border-bottom: 1px solid #25819B;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; }
+  .main-nav .lists {
+    display: block;
+    max-width: 798px;
+    margin: 0 auto;
+    padding: 1em 0;
+    overflow: hidden; }
+  .main-nav .brand {
+    float: left;
+    padding: 0 1em; }
+    .main-nav .brand h1 {
+      font-size: 1.8em;
+      font-weight: 800;
+      color: white; }
+    .main-nav .brand h1 a:hover {
+      color: #153173; }
+  .main-nav .actions {
+    float: right;
+    height: 1.8em; }
+    .main-nav .actions li {
+      float: right;
+      padding: 0 1em; }
+    .main-nav .actions li a {
+      line-height: 1.8em; }
+    .main-nav .actions .username {
+      font-weight: bold; }
+  .main-nav .search, .main-nav .signin {
+    float: right; }
+    .main-nav .search input[type="text"], .main-nav .search input[type="password"], .main-nav .signin input[type="text"], .main-nav .signin input[type="password"] {
+      border: 1px solid #25819B;
+      height: 1.8em;
+      padding: 2px 5px;
+      border-radius: 2px; }
+
+.content {
+  max-width: 798px;
+  margin: 2em auto;
+  margin-top: calc(2em + 53px);
+  border: 1px solid #C0BEBE;
+  padding-bottom: 1em;
+  background-color: white;
+  border-radius: 5px; }
+
+.content.home {
+  max-width: 100%;
+  margin: 0;
+  margin-top: 53px;
+  border-radius: 0;
+  background: url('./img/polygon.png') no-repeat;
+  background-size: 100% auto; }
+  .content.home section {
+    max-width: 798px;
+    margin: 0 auto; }
+
+.tweet-box {
+  padding: 1em;
+  background-color: #E6E6E6;
+  border-radius: 5px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom: 1px solid #C0BEBE; }
+  .tweet-box textarea[name="tweet"] {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(100% - 120px);
+    height: 48px;
+    padding: 5px 8px;
+    border: 1px solid #C0BEBE;
+    border-radius: 3px; }
+  .tweet-box input[type="submit"] {
+    display: inline-block;
+    vertical-align: top;
+    width: 100px;
+    height: 48px;
+    margin-left: 10px; }
+    .tweet-box input[type="submit"]:hover {
+      cursor: pointer; }
+
+.signup-box {
+  padding: 3em 0;
+  overflow: hidden; }
+  .signup-box .box-title, .signup-box .signup div[class^='section'] > label {
+    color: white; }
+  .signup-box .box-title {
+    float: left;
+    width: 50%;
+    font-size: 3em;
+    padding-right: 10px;
+    font-weight: 800; }
+  .signup-box .signup {
+    float: right;
+    width: 50%;
+    padding-left: 10px;
+    overflow: hidden; }
+  .signup-box .signup div[class^='section'] {
+    overflow: hidden; }
+  .signup-box .signup div[class^='section'] > label, .signup-box .signup div[class^='section'] > input {
+    display: block;
+    margin-bottom: 10px; }
+  .signup-box .signup div[class^='section'] > label {
+    font-weight: bold; }
+  .signup-box .signup div[class^='section'] > input {
+    width: 100%;
+    padding: 5px 8px;
+    border: 1px solid #C0BEBE;
+    height: 36px;
+    border-radius: 2px; }
+  .signup-box .signup input[name='btn-signup'] {
+    float: right;
+    margin-top: 10px; }
+
+.about-site {
+  color: white; }
+  .about-site .box-title {
+    font-weight: bold;
+    margin-bottom: 5px; }
+  .about-site p {
+    margin-bottom: 3px; }
+
+.timeline, .search-results {
+  overflow: hidden;
+  clear: both; }
+  .timeline .title, .search-results .title {
+    display: block;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #C0BEBE; }
+
+.tweet-item {
+  padding: 0.5em 1em;
+  background-color: white;
+  overflow: hidden;
+  border-bottom: 1px solid #C0BEBE; }
+  .tweet-item .user {
+    display: block;
+    margin-bottom: 5px; }
+  .tweet-item .user .fullname {
+    margin-right: 10px;
+    font-weight: bold; }
+    .tweet-item .user .fullname:hover {
+      text-decoration: underline; }
+  .tweet-item .user .username {
+    color: #8B8B8B; }
+  .tweet-item .tweet {
+    display: block; }
+
+.search-item {
+  padding: 0.5em 1em;
+  background-color: white;
+  overflow: hidden;
+  border-bottom: 1px solid #C0BEBE; }
+  .search-item .user-fullname, .search-item .user-username {
+    float: left;
+    margin-right: 10px; }
+  .search-item .actions {
+    float: right; }
