@@ -6,12 +6,12 @@
     <ul class="actions">
       {% if session.user_id %}
       <li><a class="btn btn-signout" href="{{ url_for('logout') }}">sign out</a></li>
-      <li><a class="username">{{ session.username }}</a><li>
+      <li><a class="username" href="{{ url_for('profile', username=session.username) }}">{{ session.username }}</a><li>
         {% else %}
         <li><a class="btn btn-signin" href="{{ url_for('login') }}">sign in</a></li>
         {% endif %}
       </ul>
-      <form class="search" method="get" action="">
+      <form class="search" method="get" action="/search">
         <input type="text" name="input-search" placeholder="Cari teman"/>
       </form>
     </div>
