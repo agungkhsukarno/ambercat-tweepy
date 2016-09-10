@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}
+Pencarian
+{% endblock %}
+{% block body %}
+{% include "nav.html" %}
+<div class="content">
+  <div class="tweet-box">
+    <form method="POST" action="{{ url_for('add_tweet') }}">
+      <textarea name="tweet" placeholder="Apa yang anda pikirkan saat ini?"></textarea>
+      <input type="submit" value="Tweet" class="btn btn-tweet" />
+    </form>
+  </div>
+  <div class="timeline">
+    <h2 class="title">Hasil Pencarian</h2>
+    {% for result in results %}
+    <div class="tweet-item">
+      <div class="user">
+        <a class="fullname" href="{{ url_for('profile', username=result.username) }}">{{ result.fullname }}</a><span class="username">@{{ result.username }}</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+

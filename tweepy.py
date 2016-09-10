@@ -185,14 +185,15 @@ def unfollow(username):
   flash('You have successfully unfollowed @%s', username)
   return redirect(url_for('profile', username=username))
 
-@app.route('/search/<query>', methods=['GET'])
-def search(query):
+@app.route('/search', methods=['GET'])
+def search():
   if 'user_id' not in session:
     return redirect(url_for('public_timeline'))
   else:
-    return render_template('search.html', results=query_db('''
-      select * from users where username like %?%''',
-      [query]))
+    return render_template('search.html',
+                           results=query_db("select * from users where username like ?",
+                                            ['%' + request.args.get('q') + '%'])
+    )
 
 if __name__ == '__main__':
   app.run()
