@@ -15,8 +15,26 @@
       <input type="submit" value="Tweet" class="btn btn-tweet" />
     </form>
   </div>
+    {% if request.endpoint == 'profile' %}
+    <div class="action">
+      <div class="profile">
+        <div class="fullname">{{ user_data.fullname }}</div>
+        <div class="username">@{{ user_data.username }}</div>
+      </div>
+      {% if 'user_id' in session %}
+        {% if session['user_id'] != user_data.id %}
+          {% if followed %}
+          <a href="{{ url_for('unfollow', username=user_data.username) }}" class="btn btn-unfollow">Unfollow</a>
+          {% else %}
+          <a href="{{ url_for('follow', username=user_data.username) }}" class="btn btn-follow">
+          Follow</a>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    </div>
+    {% endif %}
   <div class="timeline">
-    <h2 class="title">Hasil Pencarian</h2>
+    <h2 class="title">Timeline</h2>
     {% for tweet in tweets %}
     <div class="tweet-item">
       <div class="user">
