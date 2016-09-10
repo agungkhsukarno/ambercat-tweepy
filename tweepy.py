@@ -49,7 +49,7 @@ def get_user_data(username):
   return rv if rv else None
 
 def is_followed(user_id, follower_id):
-  rv = query_db('select * from followers where user_id = ? and follower_id = ?', 
+  rv = query_db('select * from followers where user_id = ? and follower_id = ?',
                 [user_id, follower_id], one=True)
   return True if rv else False
 
@@ -64,47 +64,15 @@ def home():
 def timeline():
   if 'user_id' not in session:
     return redirect(url_for('public_timeline'))
+
   return render_template('timeline.html', tweets=query_db('''
-    select tweets.*, users.* from tweets, users
-    where tweets.user_id = users.id and users.id = ?
-    order by tweets.pub_date desc limit ?''', 
+    select tweets.*, users.* from users
+    inner join tweets on (tweets.user_id=users.id)
+    where users.id in (select user_id from followers where follower_id=?)
+    order by tweets.pub_date desc limit ?''',
     [session['user_id'], app.config['PER_PAGE']]), test=query_db('''
     select * from users where username = 'ambercat'
     '''))
-
-@app.route('/profile/<username>')
-def profile(username):
-  if 'user_id' not in session:
-    return redirect(url_for('public_timeline'))
-  return render_template('timeline.html', tweets=query_db('''
-    select * from users inner join tweets on (users.id = tweets.user_id)
-    where users.username = ?''',
-    [username]), user_data=get_user_data(username),
-    followed=is_followed(get_user_id(username), session['user_id']))
-
-@app.route('/follow/<username>')
-def follow(username):
-  if 'user_id' not in session:
-    abort(401)
-  db = connect_db()
-  db.execute('''insert into followers (user_id, follower_id)
-    values (?, ?)''', (get_user_id(username), session['user_id']))
-  db.commit()
-  db.close()
-  flash('You have successfully followed @%s', username)
-  return redirect(url_for('profile', username=username))
-
-@app.route('/unfollow/<username>')
-def unfollow(username):
-  if 'user_id' not in session:
-    abort(401)
-  db = connect_db()
-  db.execute('''delete from followers where user_id = ? and follower_id = ?''',
-    (get_user_id(username), session['user_id']))
-  db.commit()
-  db.close()
-  flash('You have successfully unfollowed @%s', username)
-  return redirect(url_for('profile', username=username))
 
 @app.route('/public_timeline')
 def public_timeline():
@@ -169,6 +137,10 @@ def register():
         (request.form['username'], request.form['fullname'],
          generate_password_hash(request.form['password'])))
       db.commit()
+      user_id = get_user_id(request.form['username'])
+      db.execute('insert into followers (user_id, follower_id) values (?, ?)',
+        (user_id, user_id))
+      db.commit()
       db.close()
       flash('You were successfully registered')
       return redirect(url_for('login'))
@@ -179,9 +151,48 @@ def logout():
   flash('You were successfully logged out')
   return redirect(url_for('public_timeline'))
 
-@app.route('/test/<value>')
-def test(value):
-  return url_for('follow', username=value)
+@app.route('/profile/<username>')
+def profile(username):
+  if 'user_id' not in session:
+    return redirect(url_for('public_timeline'))
+  return render_template('timeline.html', tweets=query_db('''
+    select * from users inner join tweets on (users.id = tweets.user_id)
+    where users.username = ?''',
+    [username]), user_data=get_user_data(username),
+    followed=is_followed(get_user_id(username), session['user_id']))
+
+@app.route('/follow/<username>')
+def follow(username):
+  if 'user_id' not in session:
+    abort(401)
+  db = connect_db()
+  db.execute('''insert into followers (user_id, follower_id)
+    values (?, ?)''', (get_user_id(username), session['user_id']))
+  db.commit()
+  db.close()
+  flash('You have successfully followed @%s', username)
+  return redirect(url_for('profile', username=username))
+
+@app.route('/unfollow/<username>')
+def unfollow(username):
+  if 'user_id' not in session:
+    abort(401)
+  db = connect_db()
+  db.execute('''delete from followers where user_id = ? and follower_id = ?''',
+    (get_user_id(username), session['user_id']))
+  db.commit()
+  db.close()
+  flash('You have successfully unfollowed @%s', username)
+  return redirect(url_for('profile', username=username))
+
+@app.route('/search/<query>', methods=['GET'])
+def search(query):
+  if 'user_id' not in session:
+    return redirect(url_for('public_timeline'))
+  else:
+    return render_template('search.html', results=query_db('''
+      select * from users where username like %?%''',
+      [query]))
 
 if __name__ == '__main__':
   app.run()
